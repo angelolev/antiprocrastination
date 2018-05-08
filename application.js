@@ -4,28 +4,39 @@ var app = new Vue({
         advises: [
             {
                 id: 0,
-                text: 'Stop playing youtube videos'
+                text: 'Stop playing youtube cat videos'
             },
             {
                 id: 1,
-                text: 'You should get back to worth and sop chilling'
+                text: 'You should get back to worth and stop chilling'
             },
             {
                 id: 2,
                 text: 'Stop calling your girlfriend!'
             }
         ],
-        user: ""
+        user: "",
+        logued: false
+    },
+    created: function(){
+        this.vars = {
+            timeoutInMiliseconds: 5000,
+            timeoutId: 0
+        }
+        
+        this.setupTimers();
     },
     methods: {
       
         submit: function(event){
             
             if(this.user == ""){
-              
-              this.log = "Ingrese nombre";
+              console.log("Ingrese nombre");
               event.preventDefault();
-            }else{
+            } 
+            else 
+            {
+              this.logued = true;
               sessionStorage.setItem("user", this.user);
               let user = sessionStorage.getItem("user");
               let choosedAdvice = this.advises[Math.floor(Math.random()*this.advises.length)];
@@ -33,52 +44,23 @@ var app = new Vue({
               console.log(message)
             }   
         },
-        // startTimer: function() {
-        //     timeoutId = window.setTimeout(doInactive, timeoutInMiliseconds)
-        // },
-        // resetTimer: function() {
-        //     window.clearTimeout(timeoutId)
-        //     this.startTimer();
-        // },
-        // doInactive: function() {
-        //     console.log('gg')
-        // },
-        // setupTimers: function() {
-        //     document.addEventListener("mousemove", resetTimer, false);
-        //     document.addEventListener("mousedown", resetTimer, false);
-        //     document.addEventListener("keypress", resetTimer, false);
-        //     document.addEventListener("touchmove", resetTimer, false);
+        startTimer: function() {
+            this.vars.timeoutId = window.setTimeout(this.doInactive, this.vars.timeoutInMiliseconds)
+        },
+        resetTimer: function() {
+            window.clearTimeout(this.vars.timeoutId)
+            this.startTimer();
+        },
+        doInactive: function() {
+            console.log('gg')
+        },
+        setupTimers: function() {
+            document.addEventListener("mousemove", this.resetTimer, false);
+            document.addEventListener("mousedown", this.resetTimer, false);
+            document.addEventListener("keypress", this.resetTimer, false);
+            document.addEventListener("touchmove", this.resetTimer, false);
             
-        //     this.startTimer();
-        // }
+            this.startTimer();
+        }
      }
 })
-
-var timeoutInMiliseconds = 5000;
-var timeoutId; 
-
-function startTimer() { 
-    // window.setTimeout returns an Id that can be used to start and stop a timer
-    timeoutId = window.setTimeout(doInactive, timeoutInMiliseconds)
-}
-
-function resetTimer() { 
-    window.clearTimeout(timeoutId)
-    startTimer();
-}
-
-function doInactive() {
-    // does whatever you need it to actually do - probably signs them out or stops polling the server for info
-    console.log('gg')
-}
-
-function setupTimers () {
-    document.addEventListener("mousemove", resetTimer, false);
-    document.addEventListener("mousedown", resetTimer, false);
-    document.addEventListener("keypress", resetTimer, false);
-    document.addEventListener("touchmove", resetTimer, false);
-    
-    startTimer();
-}
-
-setupTimers();

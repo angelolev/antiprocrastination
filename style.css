@@ -1,0 +1,28 @@
+body {
+    background: #3498db;
+    font-family: 'Raleway', sans-serif;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24em;
+}
+form {
+    max-width: 50%;
+    flex: none;
+}
+input, button {
+    border: 0;
+    padding: 10px;
+    font-family: inherit;
+}
+button {
+    background: #34495e;
+    color: #fff;
+    cursor: pointer;
+}
+p {
+    color: #fff;
+}

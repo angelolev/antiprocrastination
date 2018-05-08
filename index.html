@@ -5,17 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Anti Procrastination App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 <body>
     <div id="app">
-        <form v-on:submit="submit" action="#" method="post">
-            <input v-model="user" placeholder="usuario">
-            <button type="submit">Entrar</button>
-        </form>
+        <section class="content">
+            <form v-if="!logued" v-on:submit="submit" action="#" method="post">
+                <p>Please, insert your name:</p>
+                <input type="text" name="user" v-model="user" maxlength="15">
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+        <router-link to="/foo">Go to Foo</router-link>
+        <router-link to="/bar">Go to Bar</router-link>
+
+        <router-view></router-view>
     </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="application.js"></script>
 </body>
 </html>
