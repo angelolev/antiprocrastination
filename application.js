@@ -16,7 +16,7 @@ var app = new Vue({
             }
         ],
         user: "",
-        logued: false
+        autentication: false
     },
     created: function(){
         this.vars = {
@@ -36,13 +36,13 @@ var app = new Vue({
             } 
             else 
             {
-              this.logued = true;
+              this.autentication = true;
               sessionStorage.setItem("user", this.user);
-              let user = sessionStorage.getItem("user");
-              let choosedAdvice = this.advises[Math.floor(Math.random()*this.advises.length)];
-              let message = `${user} ` + choosedAdvice.text;
-              console.log(message)
+              event.preventDefault();
             }   
+        },
+        setMessage: function(message) {
+            document.getElementById("message").innerHTML = message;
         },
         startTimer: function() {
             this.vars.timeoutId = window.setTimeout(this.doInactive, this.vars.timeoutInMiliseconds)
@@ -53,6 +53,10 @@ var app = new Vue({
         },
         doInactive: function() {
             console.log('gg')
+            let user = sessionStorage.getItem("user");
+            let choosedAdvice = this.advises[Math.floor(Math.random()*this.advises.length)];
+            let message = `${user} ` + choosedAdvice.text;
+            this.setMessage(message);
         },
         setupTimers: function() {
             document.addEventListener("mousemove", this.resetTimer, false);

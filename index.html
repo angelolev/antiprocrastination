@@ -11,11 +11,12 @@
 <body>
     <div id="app">
         <section class="content">
-            <form v-if="!logued" v-on:submit="submit" action="#" method="post">
+            <form v-show="!autentication" v-on:submit="submit" action="#" method="post">
                 <p>Please, insert your name:</p>
                 <input type="text" name="user" v-model="user" maxlength="15">
                 <button type="submit">Entrar</button>
             </form>
+            <p id="message" v-show="autentication">Don't touch your mouse/keyboard for 5 seconds</p>
         </section>
         
     </div>
